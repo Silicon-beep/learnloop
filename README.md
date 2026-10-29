@@ -1,5 +1,7 @@
 # LearnLoop
 
+**Live site: https://learnloop-mauve.vercel.app**
+
 A website for learning software engineering, computer science, AI and robotics by **seeing and doing**.
 It is designed for ADHD, visual and kinesthetic learners: short steps, visuals, hands-on practice and instant feedback.
 
