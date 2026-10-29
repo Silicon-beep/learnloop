@@ -1,0 +1,324 @@
+import type { Lesson } from "../types";
+
+export const softwareLessons: Lesson[] = [
+  {
+    slug: "how-the-web-works",
+    title: "How the web works",
+    blurb: "See the request → response conversation behind every page.",
+    icon: "🌐",
+    minutes: 8,
+    steps: [
+      {
+        id: "convo",
+        type: "learn",
+        title: "Every page is a conversation",
+        points: [
+          "Your browser **asks** for a page. That's a *request*.",
+          "A server **answers** with HTML, CSS and JavaScript. That's a *response*.",
+          "Your browser draws the answer on screen.",
+        ],
+        diagram: [
+          { icon: "💻", label: "Browser", note: "asks" },
+          { icon: "🌐", label: "Server", note: "answers" },
+          { icon: "🖼️", label: "Page", note: "appears" },
+        ],
+        tip: "Next time a site loads, picture the quick back-and-forth.",
+      },
+      {
+        id: "whats-inside",
+        type: "learn",
+        title: "What comes back?",
+        points: [
+          "The browser always asks first. The server only answers.",
+          "**HTML** is the structure, like the skeleton.",
+          "**CSS** is the style, like clothes and colours.",
+          "**JavaScript** is the behaviour, like muscles that make things move.",
+        ],
+        diagram: [
+          { icon: "🦴", label: "HTML", note: "structure" },
+          { icon: "🎨", label: "CSS", note: "style" },
+          { icon: "⚡", label: "JavaScript", note: "behaviour" },
+        ],
+      },
+      {
+        id: "be-server",
+        type: "code",
+        title: "Be the server",
+        instructions: [
+          "The browser asked for a page.",
+          'Reply by printing exactly: **Hello, browser!**',
+        ],
+        starter: '// Be the server!\nconsole.log("...");',
+        expected: ["Hello, browser!"],
+        hint: 'Replace the dots: console.log("Hello, browser!");',
+      },
+    ],
+  },
+  {
+    slug: "first-function",
+    title: "Your first function",
+    blurb: "Functions are recipes: inputs in, output out.",
+    icon: "🧩",
+    minutes: 10,
+    steps: [
+      {
+        id: "recipe",
+        type: "learn",
+        title: "A function is a recipe",
+        points: [
+          "You give it **inputs**.",
+          "It follows some steps.",
+          "It hands back an **output** with `return`.",
+        ],
+        diagram: [
+          { icon: "🥚", label: "Input", note: "n = 4" },
+          { icon: "🍳", label: "Function", note: "double" },
+          { icon: "🍽️", label: "Output", note: "8" },
+        ],
+      },
+      {
+        id: "double",
+        type: "code",
+        title: "Make it double",
+        instructions: ["Finish the function so it **doubles** a number.", "Then press Run and watch the output."],
+        starter:
+          "function double(n) {\n  // return n times 2\n}\n\nconsole.log(double(4));\nconsole.log(double(10));",
+        expected: ["8", "20"],
+        hint: "Write: return n * 2;",
+      },
+      {
+        id: "return",
+        type: "learn",
+        title: "What does return do?",
+        points: [
+          "`return` hands the result back to whoever called the function.",
+          "Once a function hits `return`, it stops.",
+          "`console.log` only *shows* a value. `return` *gives* it back so you can reuse it.",
+        ],
+      },
+      {
+        id: "greet",
+        type: "code",
+        title: "Say hi",
+        instructions: ["Return **Hi, ** followed by the name."],
+        starter: 'function greet(name) {\n  // return "Hi, " plus the name\n}\n\nconsole.log(greet("Naomi"));',
+        expected: ["Hi, Naomi"],
+        hint: 'Write: return "Hi, " + name;',
+      },
+    ],
+  },
+  {
+    slug: "git-save-points",
+    title: "Git = save points",
+    blurb: "Commits, branches and merges, explained like a video game.",
+    icon: "💾",
+    minutes: 6,
+    steps: [
+      {
+        id: "game",
+        type: "learn",
+        title: "Like save points in a game",
+        points: [
+          "**Commit** = save your progress.",
+          "**Branch** = try a risky idea safely.",
+          "**Merge** = bring the good idea back.",
+        ],
+        diagram: [
+          { icon: "💾", label: "Commit", note: "save" },
+          { icon: "🌿", label: "Branch", note: "experiment" },
+          { icon: "🔀", label: "Merge", note: "combine" },
+        ],
+      },
+      {
+        id: "branch",
+        type: "learn",
+        title: "Try risky ideas safely",
+        points: [
+          "A branch is a safe copy of your work.",
+          "If the experiment fails, throw the branch away. Your main project is untouched.",
+          "If it works, merge it back in.",
+        ],
+      },
+      {
+        id: "commit",
+        type: "learn",
+        title: "Go back any time",
+        points: [
+          "Every commit is a save point you can return to.",
+          "Broke something? Load an earlier commit, just like loading a game save.",
+        ],
+      },
+      {
+        id: "messages",
+        type: "learn",
+        title: "Write kind messages",
+        points: [
+          "Say **what** changed, in a few words.",
+          "Good: `Add login button`. Not so good: `stuff`.",
+          "Future you will say thank you.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "variables",
+    title: "Variables: labelled boxes",
+    blurb: "Store, change and print values, the building block of every program.",
+    icon: "📦",
+    minutes: 8,
+    steps: [
+      {
+        id: "box",
+        type: "learn",
+        title: "A variable is a labelled box",
+        points: [
+          "A variable has a **name** (the label) and a **value** (what's inside).",
+          "`let lives = 3;` makes a box called `lives` holding 3.",
+          "You can swap what's inside later: `lives = 2;`.",
+        ],
+        diagram: [
+          { icon: "🏷️", label: "Name", note: "lives" },
+          { icon: "📦", label: "Box", note: "holds a value" },
+          { icon: "3️⃣", label: "Value", note: "3" },
+        ],
+      },
+      {
+        id: "lose-life",
+        type: "code",
+        title: "Lose a life",
+        instructions: ["The player starts with 3 lives.", "Take **one away**, then print `lives`."],
+        starter: "let lives = 3;\n// take one life away\nconsole.log(lives);",
+        expected: ["2"],
+        hint: "Write: lives = lives - 1;",
+      },
+      {
+        id: "let-const",
+        type: "learn",
+        title: "let vs const",
+        points: [
+          "`let` boxes can change later.",
+          "`const` boxes are **locked**: great for things that shouldn't change, like a name.",
+          "Rule of thumb: use `const` unless you know it will change.",
+        ],
+      },
+      {
+        id: "score-line",
+        type: "code",
+        title: "Build a sentence",
+        instructions: ["Print exactly: **Naomi has 40 points**", "Use the two variables, don't type the values again."],
+        starter: 'const name = "Naomi";\nconst points = 40;\n// print: Naomi has 40 points',
+        expected: ["Naomi has 40 points"],
+        hint: 'console.log(name + " has " + points + " points");',
+      },
+    ],
+  },
+  {
+    slug: "decisions",
+    title: "Decisions: if / else",
+    blurb: "Make your code choose between paths.",
+    icon: "🔀",
+    minutes: 10,
+    steps: [
+      {
+        id: "fork",
+        type: "learn",
+        title: "A fork in the road",
+        points: [
+          "`if` asks a yes/no question.",
+          "If the answer is **yes**, run one path. Otherwise (`else`) run the other.",
+          "Programs use this everywhere: log in or not, win or lose, stop or go.",
+        ],
+        diagram: [
+          { icon: "❓", label: "Question", note: "n > 0 ?" },
+          { icon: "✅", label: "Yes path", note: "positive" },
+          { icon: "❌", label: "No path", note: "else" },
+        ],
+      },
+      {
+        id: "sign",
+        type: "code",
+        title: "Positive, negative or zero",
+        instructions: [
+          'Return **"positive"**, **"negative"** or **"zero"**.',
+          "You can chain checks: `if … else if … else`.",
+        ],
+        starter:
+          'function sign(n) {\n  // return "positive", "negative" or "zero"\n}\n\nconsole.log(sign(5));\nconsole.log(sign(-2));\nconsole.log(sign(0));',
+        expected: ["positive", "negative", "zero"],
+        hint: 'if (n > 0) return "positive"; if (n < 0) return "negative"; return "zero";',
+      },
+      {
+        id: "remainder",
+        type: "learn",
+        title: "The remainder trick",
+        points: [
+          "`%` gives the **remainder** after dividing.",
+          "`7 % 2` is `1` (7 = 3 groups of 2, with 1 left over).",
+          "An even number leaves a remainder of **0** when divided by 2.",
+        ],
+      },
+      {
+        id: "parity",
+        type: "code",
+        title: "Even or odd?",
+        instructions: ['Return **"even"** or **"odd"**.'],
+        starter: 'function parity(n) {\n  // return "even" or "odd"\n}\n\nconsole.log(parity(4));\nconsole.log(parity(7));',
+        expected: ["even", "odd"],
+        hint: 'if (n % 2 === 0) { return "even"; } return "odd";',
+      },
+    ],
+  },
+  {
+    slug: "debugging",
+    title: "Debugging: be a detective",
+    blurb: "Every programmer gets bugs. Learn to find and fix them calmly.",
+    icon: "🐛",
+    minutes: 8,
+    steps: [
+      {
+        id: "detective",
+        type: "learn",
+        title: "Bugs are normal",
+        points: [
+          "Every programmer writes bugs, every day. It's not a sign you're bad at this.",
+          "Debugging is detective work: **observe → guess → test → fix**.",
+          "Read the error message. It usually tells you where to look.",
+        ],
+        diagram: [
+          { icon: "👀", label: "Observe", note: "what happened?" },
+          { icon: "💭", label: "Guess", note: "why?" },
+          { icon: "🧪", label: "Test", note: "change one thing" },
+        ],
+        tip: "Change only ONE thing at a time, so you know what fixed it.",
+      },
+      {
+        id: "off-by-one",
+        type: "code",
+        title: "Fix the counting bug",
+        instructions: ["This should print **1, 2, 3** but prints 0, 1, 2.", "Find the bug and fix it."],
+        starter: "// Bug: prints 0 1 2 instead of 1 2 3\nfor (let i = 0; i < 3; i++) {\n  console.log(i);\n}",
+        expected: ["1", "2", "3"],
+        hint: "Start at 1 and keep going while i <= 3.",
+      },
+      {
+        id: "wrong-sign",
+        type: "code",
+        title: "Fix the add function",
+        instructions: ["`add(2, 3)` should print **5**. Something's off."],
+        starter: "function add(a, b) {\n  return a - b;\n}\n\nconsole.log(add(2, 3));",
+        expected: ["5"],
+        hint: "Look at the operator inside return.",
+      },
+      {
+        id: "tips",
+        type: "learn",
+        title: "Your debugging toolkit",
+        points: [
+          "`console.log` a value to *see* what's really inside.",
+          "Shrink the problem: delete code until the bug disappears.",
+          "Take a break. Fresh eyes spot bugs fast.",
+        ],
+      },
+    ],
+  },
+];
