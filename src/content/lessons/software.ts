@@ -130,6 +130,19 @@ export const softwareLessons: Lesson[] = [
         ],
       },
       {
+        id: "make-commits",
+        type: "code",
+        title: "Make some save points",
+        instructions: [
+          "A commit adds a new save point to your project's **history**.",
+          "Finish `commit` so it adds the message to `saves`.",
+        ],
+        starter:
+          'const saves = [];\n\nfunction commit(message) {\n  // add the message to the saves list\n}\n\ncommit("Add login button");\ncommit("Fix typo");\nconsole.log(saves);',
+        expected: ['["Add login button","Fix typo"]'],
+        hint: "saves.push(message);",
+      },
+      {
         id: "branch",
         type: "learn",
         title: "Try risky ideas safely",
@@ -318,6 +331,115 @@ export const softwareLessons: Lesson[] = [
           "Shrink the problem: delete code until the bug disappears.",
           "Take a break. Fresh eyes spot bugs fast.",
         ],
+      },
+    ],
+  },
+  {
+    slug: "json-and-apis",
+    title: "APIs and JSON: apps talking",
+    blurb: "How programs ask each other for data, and the format the answers come in.",
+    icon: "📬",
+    minutes: 8,
+    steps: [
+      {
+        id: "shared-language",
+        type: "learn",
+        title: "A shared language for apps",
+        points: [
+          "An **API** is a menu of things one program lets another program ask for.",
+          "The reply usually comes as **JSON**: text shaped like an object.",
+          'In JSON, keys are in quotes: `{"name": "Beep"}`.',
+        ],
+        diagram: [
+          { icon: "📱", label: "App", note: "asks" },
+          { icon: "🍽️", label: "API", note: "the menu" },
+          { icon: "📦", label: "JSON", note: "the reply" },
+        ],
+      },
+      {
+        id: "parse",
+        type: "code",
+        title: "Open the package",
+        instructions: [
+          "`JSON.parse` turns JSON **text** into a real object.",
+          "Parse `text`, then print the battery level.",
+        ],
+        starter: 'const text = \'{"name":"Beep","battery":80}\';\n// turn the text into an object, then print the battery',
+        expected: ["80"],
+        hint: "console.log(JSON.parse(text).battery);",
+      },
+      {
+        id: "stringify",
+        type: "code",
+        title: "Pack it up",
+        instructions: ["`JSON.stringify` goes the other way: object to text.", "Print the robot as JSON text."],
+        starter: 'const robot = { name: "Beep", battery: 80 };\n// print the robot as JSON text',
+        expected: ['{"name":"Beep","battery":80}'],
+        hint: "console.log(JSON.stringify(robot));",
+      },
+      {
+        id: "real-apis",
+        type: "learn",
+        title: "Real APIs",
+        points: [
+          "Weather apps, maps and games all use APIs.",
+          "It's the same request → response conversation from the very first lesson.",
+          "The response body is usually JSON, which you `parse` and use.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "testing",
+    title: "Testing: check your own code",
+    blurb: "Tiny checks that catch bugs before your users do.",
+    icon: "✅",
+    minutes: 8,
+    steps: [
+      {
+        id: "tiny-questions",
+        type: "learn",
+        title: "A test is a tiny question",
+        points: [
+          "Pick an input where you **already know** the right answer.",
+          "Run your code and compare. Match = **pass**, mismatch = **fail**.",
+          "A failing test is a gift: it tells you exactly where to look.",
+        ],
+        diagram: [
+          { icon: "❓", label: "Input", note: "max(3, 7)" },
+          { icon: "🧩", label: "Your code", note: "runs" },
+          { icon: "✅", label: "Expected", note: "7 ?" },
+        ],
+      },
+      {
+        id: "tests-find-bug",
+        type: "code",
+        title: "Let the tests find the bug",
+        instructions: ["Two tests print **fail**. The bug is in `max`.", "Fix the function so both tests print **pass**."],
+        starter:
+          'function max(a, b) {\n  return a < b ? a : b;\n}\n\nconsole.log(max(3, 7) === 7 ? "pass" : "fail");\nconsole.log(max(9, 2) === 9 ? "pass" : "fail");',
+        expected: ["pass", "pass"],
+        hint: "The comparison points the wrong way. Use a > b.",
+      },
+      {
+        id: "edge-cases",
+        type: "learn",
+        title: "Test the sneaky cases",
+        points: [
+          "Try the **edges**: zero, negative numbers, empty lists, equal values.",
+          "Bugs love hiding at the edges.",
+          "Each bug you find becomes a new test, so it can't come back.",
+        ],
+      },
+      {
+        id: "write-test",
+        type: "code",
+        title: "Write your own test",
+        instructions: ['Add a line that prints **"pass"** if `square(5)` is 25, otherwise **"fail"**.'],
+        starter:
+          'function square(n) {\n  return n * n;\n}\n\n// add a test: print "pass" if square(5) is 25, otherwise "fail"',
+        expected: ["pass"],
+        hint: 'console.log(square(5) === 25 ? "pass" : "fail");',
       },
     ],
   },

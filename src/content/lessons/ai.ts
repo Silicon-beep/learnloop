@@ -24,6 +24,19 @@ export const aiLessons: Lesson[] = [
         ],
       },
       {
+        id: "spot-pattern",
+        type: "code",
+        title: "Spot the pattern",
+        instructions: [
+          "Hours studied → test score: **1 → 50**, **2 → 60**, **3 → 70**.",
+          "Find the pattern and finish `predict` so it works for any number of hours.",
+        ],
+        starter:
+          "// 1 hour -> 50, 2 hours -> 60, 3 hours -> 70\nfunction predict(hours) {\n  // find the pattern and return the predicted score\n  return 0;\n}\n\nconsole.log(predict(4));\nconsole.log(predict(0));\nconsole.log(predict(6));",
+        expected: ["80", "40", "100"],
+        hint: "Each extra hour adds 10, and 0 hours gives 40: return 40 + 10 * hours;",
+      },
+      {
         id: "more-examples",
         type: "learn",
         title: "More examples, better model",
@@ -198,6 +211,173 @@ console.log(predict(25));`,
           "Training = automatically **adjusting the weights** until the predictions get better.",
           "Try changing the weights in your neuron and see which inputs start to matter more.",
           "That's the whole idea behind deep learning, just at a huge scale.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "how-chatbots-work",
+    title: "How chatbots work",
+    blurb: "Build a tiny next-word predictor and see why chatbots can be confidently wrong.",
+    icon: "💬",
+    minutes: 12,
+    steps: [
+      {
+        id: "next-word",
+        type: "learn",
+        title: "Chatbots predict the next word",
+        points: [
+          "A language model reads your text and guesses the **next word**.",
+          "It adds that word, then guesses again, and again.",
+          "It learned which words tend to follow which by reading a huge amount of text.",
+        ],
+        diagram: [
+          { icon: "📝", label: "Your text", note: "the cat sat on the…" },
+          { icon: "🎯", label: "Guess", note: "mat" },
+          { icon: "➕", label: "Add & repeat", note: "one word at a time" },
+        ],
+      },
+      {
+        id: "count-follows",
+        type: "code",
+        title: "Count what follows “the”",
+        instructions: [
+          "Every time the word **the** appears, look at the word right after it.",
+          "Count how often each following word appears in `counts`.",
+        ],
+        starter:
+          'const words = "the cat sat on the mat the cat ran".split(" ");\nconst counts = {};\n// for every "the", count the word that comes right after it\nconsole.log(counts);',
+        expected: ['{"cat":2,"mat":1}'],
+        hint: 'for (let i = 0; i < words.length - 1; i++) { if (words[i] === "the") { const next = words[i + 1]; counts[next] = (counts[next] || 0) + 1; } }',
+      },
+      {
+        id: "most-likely",
+        type: "code",
+        title: "Pick the most likely word",
+        instructions: ["Find the word with the **biggest count** and print it.", "That's the model's best guess."],
+        starter:
+          'const counts = { cat: 2, mat: 1, dog: 4 };\nlet best = "";\n// find the word with the biggest count\nconsole.log(best);',
+        expected: ["dog"],
+        hint: 'for (const word in counts) { if (best === "" || counts[word] > counts[best]) best = word; }',
+      },
+      {
+        id: "confident-wrong",
+        type: "learn",
+        title: "Confident isn't the same as correct",
+        points: [
+          "The model picks **likely-sounding** words. It doesn't look facts up by default.",
+          "So it can sound sure and still be wrong.",
+          "Check anything important, and keep a human in the loop.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "fair-data",
+    title: "Fair data, fair models",
+    blurb: "Measure how lopsided a dataset is, and why that matters.",
+    icon: "⚖️",
+    minutes: 10,
+    steps: [
+      {
+        id: "only-knows",
+        type: "learn",
+        title: "A model only knows its examples",
+        points: [
+          "If 90% of your photos are cats, the model gets great at cats and weak at dogs.",
+          "Unbalanced data can make a model **less accurate or unfair** for the group that's under-represented.",
+          "Always ask: **who is missing** from this data?",
+        ],
+        diagram: [
+          { icon: "🗂️", label: "Data", note: "who's in it?" },
+          { icon: "🧠", label: "Model", note: "learns patterns" },
+          { icon: "⚖️", label: "Outcome", note: "fair for everyone?" },
+        ],
+      },
+      {
+        id: "count-labels",
+        type: "code",
+        title: "Count each label",
+        instructions: ["Count how many of each label are in the data."],
+        starter: 'const labels = ["cat", "cat", "cat", "cat", "dog"];\nconst counts = {};\n// count how many of each label\nconsole.log(counts);',
+        expected: ['{"cat":4,"dog":1}'],
+        hint: "for (const l of labels) { counts[l] = (counts[l] || 0) + 1; }",
+      },
+      {
+        id: "how-lopsided",
+        type: "code",
+        title: "How lopsided is it?",
+        instructions: ["Count the cats, then print what **percent** of the data they are."],
+        starter:
+          'const labels = ["cat", "cat", "cat", "cat", "dog"];\nlet cats = 0;\n// count the cats\nconsole.log((cats * 100) / labels.length);',
+        expected: ["80"],
+        hint: 'for (const l of labels) { if (l === "cat") cats++; }',
+      },
+      {
+        id: "fixing",
+        type: "learn",
+        title: "What can we do?",
+        points: [
+          "**Collect more** examples of the missing group.",
+          "**Balance** the data so each group is represented.",
+          "**Test each group separately**, not just the overall score, and ask the people affected.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "learning-by-nudging",
+    title: "Learning by nudging",
+    blurb: "Measure how wrong a guess is, then nudge it closer, again and again.",
+    icon: "🏔️",
+    minutes: 12,
+    steps: [
+      {
+        id: "nudge-idea",
+        type: "learn",
+        title: "Guess, measure, nudge",
+        points: [
+          "**Loss** is a number for how wrong the model is. Smaller is better.",
+          "Training nudges the model's settings a little to make the loss smaller.",
+          "Repeat thousands of times and the model gets good.",
+        ],
+        diagram: [
+          { icon: "🎯", label: "Guess", note: "prediction" },
+          { icon: "📏", label: "Loss", note: "how wrong?" },
+          { icon: "🔧", label: "Nudge", note: "improve a bit" },
+        ],
+      },
+      {
+        id: "loss-code",
+        type: "code",
+        title: "Measure the loss",
+        instructions: ["Return the **squared difference** between the prediction and the actual value.", "Squaring makes every error positive."],
+        starter:
+          "function loss(prediction, actual) {\n  // return the squared difference\n}\n\nconsole.log(loss(3, 5));\nconsole.log(loss(5, 5));\nconsole.log(loss(8, 5));",
+        expected: ["4", "0", "9"],
+        hint: "const d = prediction - actual; return d * d;",
+      },
+      {
+        id: "nudge-code",
+        type: "code",
+        title: "Nudge toward the target",
+        instructions: [
+          "Each loop, move `guess` toward `target` by `rate` times the gap.",
+          "Watch the guess get closer each time.",
+        ],
+        starter:
+          "let guess = 0;\nconst target = 10;\nconst rate = 0.5;\n\nfor (let i = 0; i < 3; i++) {\n  // move guess toward target by rate * (target - guess)\n}\nconsole.log(guess);",
+        expected: ["8.75"],
+        hint: "guess = guess + rate * (target - guess);",
+      },
+      {
+        id: "learning-rate",
+        type: "learn",
+        title: "The learning rate",
+        points: [
+          "The **learning rate** is how big each nudge is.",
+          "Too big and it overshoots. Too small and it takes forever.",
+          "Try changing `rate` to 0.1 or 1.5 and see what happens to the answer.",
         ],
       },
     ],

@@ -222,4 +222,166 @@ export const csLessons: Lesson[] = [
       },
     ],
   },
+  {
+    slug: "recursion",
+    title: "Recursion: a mirror in a mirror",
+    blurb: "Functions that call themselves, and the one rule that stops them.",
+    icon: "🪞",
+    minutes: 12,
+    steps: [
+      {
+        id: "mirror",
+        type: "learn",
+        title: "A function that calls itself",
+        points: [
+          "**Recursion** = solving a problem by solving a *smaller* version of it.",
+          "It needs a **base case**: a point where it stops calling itself.",
+          "No base case means it never ends, like two mirrors facing each other.",
+        ],
+        diagram: [
+          { icon: "🪞", label: "Call", note: "countdown(3)" },
+          { icon: "🔁", label: "Smaller", note: "countdown(2)" },
+          { icon: "🛑", label: "Base case", note: "n is 0, stop" },
+        ],
+      },
+      {
+        id: "countdown",
+        type: "code",
+        title: "Recursive countdown",
+        instructions: [
+          "Print `n`, then call `countdown(n - 1)`.",
+          "Stop when `n` reaches 0 (that's your base case).",
+        ],
+        starter:
+          "function countdown(n) {\n  // base case: stop when n is 0\n  // otherwise print n, then call countdown(n - 1)\n}\n\ncountdown(3);",
+        expected: ["3", "2", "1"],
+        hint: "if (n === 0) return; console.log(n); countdown(n - 1);",
+      },
+      {
+        id: "factorial-idea",
+        type: "learn",
+        title: "Factorials",
+        points: [
+          "`5! = 5 × 4 × 3 × 2 × 1 = 120`.",
+          "Notice `5! = 5 × 4!`. The big problem contains a smaller copy of itself.",
+          "Base case: `1! = 1`.",
+        ],
+      },
+      {
+        id: "factorial",
+        type: "code",
+        title: "Build factorial",
+        instructions: ["Return `n` times `factorial(n - 1)`.", "If `n` is 1 or less, return 1."],
+        starter:
+          "function factorial(n) {\n  // base case: if n is 1 or less, return 1\n  // otherwise return n times factorial(n - 1)\n}\n\nconsole.log(factorial(1));\nconsole.log(factorial(3));\nconsole.log(factorial(5));",
+        expected: ["1", "6", "120"],
+        hint: "if (n <= 1) return 1; return n * factorial(n - 1);",
+      },
+    ],
+  },
+  {
+    slug: "binary",
+    title: "Counting in binary",
+    blurb: "How computers count with only 0s and 1s.",
+    icon: "🔢",
+    minutes: 8,
+    steps: [
+      {
+        id: "two-digits",
+        type: "learn",
+        title: "Computers count with two digits",
+        points: [
+          "A **bit** is a 0 or a 1: off or on.",
+          "Each place is worth double the one to its right: **8, 4, 2, 1**.",
+          "`1011` = 8 + 0 + 2 + 1 = **11**.",
+        ],
+        diagram: [
+          { icon: "💡", label: "Bit", note: "0 or 1" },
+          { icon: "🔢", label: "Places", note: "8 4 2 1" },
+          { icon: "🔟", label: "Number", note: "1011 = 11" },
+        ],
+      },
+      {
+        id: "add-places",
+        type: "code",
+        title: "Add up the places",
+        instructions: ["Add each place value to `total` whenever its bit is **1**."],
+        starter:
+          "const bits = [1, 0, 1, 1];\nconst places = [8, 4, 2, 1];\nlet total = 0;\n// add the place value whenever the bit is 1\nconsole.log(total);",
+        expected: ["11"],
+        hint: "for (let i = 0; i < bits.length; i++) { if (bits[i] === 1) total += places[i]; }",
+      },
+      {
+        id: "why-binary",
+        type: "learn",
+        title: "Why only two digits?",
+        points: [
+          "Tiny switches (transistors) are either on or off, which is perfect for 0 and 1.",
+          "Text, photos and music are all stored as long strings of bits.",
+          "**8 bits = 1 byte**, which can hold 256 different values.",
+        ],
+      },
+      {
+        id: "to-binary",
+        type: "code",
+        title: "Let JavaScript help",
+        instructions: ["Print `n` written in binary.", "Numbers have a `.toString(2)` method for this."],
+        starter: "const n = 10;\n// print n in binary",
+        expected: ["1010"],
+        hint: "console.log(n.toString(2));",
+      },
+    ],
+  },
+  {
+    slug: "dictionaries",
+    title: "Look things up by name",
+    blurb: "Objects store values under names, perfect for finding things fast.",
+    icon: "📖",
+    minutes: 10,
+    steps: [
+      {
+        id: "drawers",
+        type: "learn",
+        title: "Labelled drawers",
+        points: [
+          "An **object** stores values under names called **keys**: `{ Ana: 12, Ben: 15 }`.",
+          "Look one up with `ages.Ben` or `ages[\"Ben\"]`.",
+          "Great for \"find by name\", where arrays are \"find by position\".",
+        ],
+        diagram: [
+          { icon: "🏷️", label: "Key", note: "Ben" },
+          { icon: "🗄️", label: "Object", note: "the drawers" },
+          { icon: "🔎", label: "Value", note: "15" },
+        ],
+      },
+      {
+        id: "look-up",
+        type: "code",
+        title: "Look it up",
+        instructions: ["Print Ben's age."],
+        starter: "const ages = { Ana: 12, Ben: 15, Cy: 9 };\n// print Ben's age",
+        expected: ["15"],
+        hint: "console.log(ages.Ben);",
+      },
+      {
+        id: "update",
+        type: "code",
+        title: "Update the stock",
+        instructions: ["Add **2 bananas**, and add **one more apple**.", "Assigning to a new key creates it."],
+        starter: "const stock = { apples: 3 };\n// add 2 bananas, and one more apple\nconsole.log(stock);",
+        expected: ['{"apples":4,"bananas":2}'],
+        hint: "stock.bananas = 2; stock.apples = stock.apples + 1;",
+      },
+      {
+        id: "count-words",
+        type: "code",
+        title: "Count the words",
+        instructions: ["Count how many times each word appears.", "If a word is new, start its count at 0 first."],
+        starter:
+          'const words = ["red", "blue", "red", "green", "red"];\nconst counts = {};\n// count how many times each word appears\nconsole.log(counts);',
+        expected: ['{"red":3,"blue":1,"green":1}'],
+        hint: "for (const w of words) { counts[w] = (counts[w] || 0) + 1; }",
+      },
+    ],
+  },
 ];
